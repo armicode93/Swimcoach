@@ -7,18 +7,21 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name= "coaches")
 @AllArgsConstructor
 @NoArgsConstructor
-public class coach {
+public class Coach {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter @Setter
-    private int id;
+    private Long id;
     @Getter @Setter
-    private String name;
+    private String firstName;
     @Getter @Setter
     private String lastname;
     @Getter @Setter
@@ -65,6 +68,25 @@ public class coach {
     // Account status
     @Getter @Setter
     private boolean active;
+
+    // Relations
+    @OneToMany(mappedBy = "coach")
+    private List<Booking> bookings = new ArrayList<>();
+
+    @OneToMany(mappedBy = "coach")
+    private List<Review> reviews = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "coach_pool",
+            joinColumns = @JoinColumn(name = "coach_id"),
+            inverseJoinColumns = @JoinColumn(name = "pool_id")
+    )
+    private List<Pool> pools = new ArrayList<>();
+
+    @OneToMany(mappedBy = "coach")
+    private List<CoachService> coachServices = new ArrayList<>();
+
 
 
 

@@ -14,11 +14,11 @@ import java.util.List;
 @Table(name= "users")
 @AllArgsConstructor
 @NoArgsConstructor
-public class user {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Getter @Setter
     private String firstName;
@@ -36,8 +36,10 @@ public class user {
     @Getter @Setter
     private String phone;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     @Getter @Setter
-    private String role;
+    private Role role;
 
     @Getter @Setter
     private LocalDateTime createdAt;
@@ -45,12 +47,14 @@ public class user {
     @Getter @Setter
     private boolean active;
 
-    /*@OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user")
+    @Getter @Setter
     private List<Booking> bookings = new ArrayList<>();
-      */
+
 
     @OneToMany(mappedBy = "user")
-    private List<review> reviews = new ArrayList<>();
+    @Getter @Setter
+    private List<Review> reviews = new ArrayList<>();
 
 
 

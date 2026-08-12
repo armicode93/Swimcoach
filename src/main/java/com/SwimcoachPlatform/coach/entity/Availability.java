@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Time;
 import java.util.Date;
@@ -14,12 +13,12 @@ import java.util.Date;
 @Table(name= "availabilities")
 @AllArgsConstructor
 @NoArgsConstructor
-public class availability {
+public class Availability {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter @Setter
-    private int id;
+    private Long id;
     @Getter @Setter
     private Date dayOfWeek;
     @Getter @Setter
@@ -32,7 +31,13 @@ public class availability {
     @ManyToOne
     @JoinColumn(name = "coach_id", nullable = false)
     @Getter @Setter
-    private coach coach;
+    private Coach coach;
+
+
+    @ManyToOne
+    @JoinColumn(name = "service_id", nullable = false)
+    @Getter @Setter
+    private Service service;
 
 
 }

@@ -13,11 +13,11 @@ import java.time.LocalDateTime;
 @Table(name= "reviews")
 @AllArgsConstructor
 @NoArgsConstructor
-public class review {
+public class Review {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Getter @Setter
     private String rating;
@@ -32,13 +32,18 @@ public class review {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private user user;
+    @Getter @Setter
+    private User user;
 
     @ManyToOne
     @JoinColumn(name = "coach_id", nullable = false)
-    private coach coach;
+    @Getter @Setter
+    private Coach coach;
 
-
+    @ManyToOne
+    @JoinColumn(name = "booking_id", nullable = false)
+    @Getter @Setter
+    private Booking booking;
 
 
 }
