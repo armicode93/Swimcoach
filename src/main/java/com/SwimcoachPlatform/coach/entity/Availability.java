@@ -37,7 +37,7 @@ public class Availability {
     @ManyToOne
     @JoinColumn(name = "service_id", nullable = false)
     @Getter @Setter
-    private Service service;
+    private Course course;
 
 
 }

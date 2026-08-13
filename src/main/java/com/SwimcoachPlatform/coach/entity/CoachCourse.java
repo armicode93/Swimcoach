@@ -1,6 +1,4 @@
 package com.SwimcoachPlatform.coach.entity;
-
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,16 +6,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
-@Table(name= "services")
+@Table(name = "coach_services")
 @AllArgsConstructor
 @NoArgsConstructor
-
-// rappresenta il tipo di corso/attivita disponibile sulla piattaforma
-public class Service {
+public class CoachCourse {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,26 +19,20 @@ public class Service {
     private Long id;
 
     @Getter @Setter
-    private String name;
+    private BigDecimal price;
 
     @Getter @Setter
-    private String description;
-
-    @Getter @Setter
-    private boolean active;
-
+    private Integer duration;
 
     @ManyToOne
     @JoinColumn(name = "coach_id", nullable = false)
+    @Getter @Setter
     private Coach coach;
 
-
-    @OneToMany(mappedBy = "service")
-    private List<Booking> bookings = new ArrayList<>();
-
-    @OneToMany(mappedBy = "service")
-    private List<CoachService> coachServices = new ArrayList<>();
-
+    @ManyToOne
+    @JoinColumn(name = "course_id", nullable = false)
+    @Getter @Setter
+    private Course course;
 
 
 

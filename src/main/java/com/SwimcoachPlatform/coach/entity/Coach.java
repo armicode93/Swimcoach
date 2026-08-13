@@ -85,7 +85,7 @@ public class Coach {
     private List<Pool> pools = new ArrayList<>();
 
     @OneToMany(mappedBy = "coach")
-    private List<CoachService> coachServices = new ArrayList<>();
+    private List<CoachCourse> coachCourses = new ArrayList<>();
 
 
 
