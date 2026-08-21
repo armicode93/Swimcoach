@@ -19,19 +19,21 @@ public class CoachService {
         this.coachRepository = coachRepository;
     }
 
-    public List<Coach> findAll() {
+    public List<Coach> findAllCoaches() {
         return coachRepository.findAll();
     }
 
-    public Optional<Coach> findById(Long id) {
-        return coachRepository.findById(id);
+    public Coach findCoachById(Long id) {
+        return coachRepository.findById(id).orElse(null);
     }
 
-    public Coach save(Coach coach) {
+    public Coach addCoach(Coach coach) {
         return coachRepository.save(coach);
     }
 
-    public void delete(Long id) {
+    public Coach UpdateCoach(Coach coach) {return coachRepository.save(coach);}
+
+    public void deleteCoach(Long id) {
         coachRepository.deleteById(id);
     }
 }

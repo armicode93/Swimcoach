@@ -20,19 +20,19 @@ public class CoachCourseService {
 
     }
 
-    public List<CoachCourse> findAll() {
+    public List<CoachCourse> findAllCoachCourses() {
         return coachCourseRepository.findAll();
     }
 
-    public Optional<CoachCourse> findById(Long id) {
-        return coachCourseRepository.findById(id);
+    public CoachCourse findCoachCorsesById(Long id) {
+        return coachCourseRepository.findById(id).orElse(null);
     }
 
-    public CoachCourse save(CoachCourse coachCourse) {
+    public CoachCourse addCoachCourses(CoachCourse coachCourse) {
         return coachCourseRepository.save(coachCourse);
     }
 
-    public void delete(Long id) {
+    public void deleteCoachCourses(Long id) {
         coachCourseRepository.deleteById(id);
     }
 }
