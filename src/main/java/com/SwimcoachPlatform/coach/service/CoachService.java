@@ -31,7 +31,7 @@ public class CoachService {
         return coachRepository.save(coach);
     }
 
-    public Coach UpdateCoach(Coach coach) {return coachRepository.save(coach);}
+    public Coach updateCoach(Coach coach) {return coachRepository.save(coach);}
 
     public void deleteCoach(Long id) {
         coachRepository.deleteById(id);

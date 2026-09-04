@@ -33,7 +33,7 @@ public class CoachController {
     // PUT: modifica un coach
     @PutMapping("/{id}")
     public Coach updateCoach(@PathVariable Long id, @RequestBody Coach coach)
-    { coach.setId(id); return coachService.UpdateCoach(coach); }
+    { coach.setId(id); return coachService.updateCoach(coach); }
 
     // DELETE: elimina un coach
     @DeleteMapping("/{id}")
