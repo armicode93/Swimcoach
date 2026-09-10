@@ -29,7 +29,7 @@ public class AvailabilityService {
     public void deleteAvailability(Long id) {
         availabilityRepository.deleteById(id);
     }
-    public Availability updateAvailability(Long id, Availability availability) {
+    public Availability updateAvailability(Availability availability) {
         return availabilityRepository.save(availability);
 
     }

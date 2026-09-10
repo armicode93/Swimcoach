@@ -33,9 +33,6 @@ public class Course {
     private boolean active;
 
 
-    @ManyToOne
-    @JoinColumn(name = "coach_id", nullable = false)
-    private Coach coach;
 
 
     @OneToMany(mappedBy = "course")
