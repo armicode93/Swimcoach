@@ -29,8 +29,23 @@ public class AvailabilityService {
     public void deleteAvailability(Long id) {
         availabilityRepository.deleteById(id);
     }
-    public Availability updateAvailability(Availability availability) {
-        return availabilityRepository.save(availability);
+    public Availability updateAvailability(Long id, Availability updatedAvailability) {
 
+        Availability existingAvailability = availabilityRepository
+                .findById(id)
+                .orElse(null);
+
+        if (existingAvailability == null) {
+            return null;
+        }
+
+        existingAvailability.setDayOfWeek(updatedAvailability.getDayOfWeek());
+        existingAvailability.setStartTime(updatedAvailability.getStartTime());
+        existingAvailability.setEndTime(updatedAvailability.getEndTime());
+        existingAvailability.setActive(updatedAvailability.isActive());
+        existingAvailability.setCoach(updatedAvailability.getCoach());
+        existingAvailability.setCourse(updatedAvailability.getCourse());
+
+        return availabilityRepository.save(existingAvailability);
     }
 }

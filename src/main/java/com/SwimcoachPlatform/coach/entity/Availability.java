@@ -6,8 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.sql.Time;
-import java.util.Date;
+
+import java.time.LocalTime;
 
 @Entity
 @Table(name= "availabilities")
@@ -19,12 +19,14 @@ public class Availability {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter @Setter
     private Long id;
+
+    @Enumerated(EnumType.STRING)
     @Getter @Setter
-    private Date dayOfWeek;
+    private DayOfWeek dayOfWeek;
     @Getter @Setter
-    private Time startTime;
+    private LocalTime startTime;
     @Getter @Setter
-    private Time endTime;
+    private LocalTime endTime;
     @Getter @Setter
     private boolean active;
 
@@ -35,7 +37,7 @@ public class Availability {
 
 
     @ManyToOne
-    @JoinColumn(name = "service_id", nullable = false)
+    @JoinColumn(name = "course_id", nullable = false)
     @Getter @Setter
     private Course course;
 

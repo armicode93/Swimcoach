@@ -46,19 +46,14 @@ public class Pool {
     @Getter @Setter
     private boolean active;
 
-
+/*
     @ManyToMany(mappedBy = "pools")
     @Getter @Setter
     private List<Coach> coaches = new ArrayList<>();
 
-    @ManyToMany
-    @JoinTable(
-            name = "coach_pool",
-            joinColumns = @JoinColumn(name = "coach_id"),
-            inverseJoinColumns = @JoinColumn(name = "pool_id")
-    )
-    @Getter @Setter
-    private List<Pool> pools = new ArrayList<>();
+ */
+
+
 
 
 

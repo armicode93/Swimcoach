@@ -1,6 +1,7 @@
 package com.SwimcoachPlatform.coach.service;
 
 
+import com.SwimcoachPlatform.coach.entity.Coach;
 import com.SwimcoachPlatform.coach.entity.CoachCourse;
 import com.SwimcoachPlatform.coach.repository.CoachCourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,8 @@ public class CoachCourseService {
     public CoachCourse addCoachCourses(CoachCourse coachCourse) {
         return coachCourseRepository.save(coachCourse);
     }
+    public CoachCourse updateCoachCourse(CoachCourse coachCourse) {return coachCourseRepository.save(coachCourse);}
+
 
     public void deleteCoachCourses(Long id) {
         coachCourseRepository.deleteById(id);

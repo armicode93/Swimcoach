@@ -1,5 +1,6 @@
 package com.SwimcoachPlatform.coach.controllers;
 
+import com.SwimcoachPlatform.coach.entity.Coach;
 import com.SwimcoachPlatform.coach.entity.CoachCourse;
 import com.SwimcoachPlatform.coach.service.CoachCourseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,10 @@ public class CoachCourseController {
     public CoachCourse addCoachCourse(@RequestBody CoachCourse coachCourse) {
         return coachCourseService.addCoachCourses(coachCourse);
     }
+    // PUT: modifica un coach
+    @PutMapping("/{id}")
+    public CoachCourse updateCoachCourse(@PathVariable Long id, @RequestBody CoachCourse coachCourse)
+    { coachCourse.setId(id); return coachCourseService.updateCoachCourse(coachCourse); }
 
     // DELETE: elimina una relazione
     @DeleteMapping("/{id}")

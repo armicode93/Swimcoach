@@ -40,8 +40,8 @@ public class AvailabilityController {
     @PutMapping("/{id}")
     public Availability updateAvailability(@PathVariable Long id,
                                            @RequestBody Availability availability) {
-        availability.setId(id);
-        return availabilityService.updateAvailability(availability);
+
+        return availabilityService.updateAvailability(id, availability);
     }
 
     // DELETE: elimina una disponibilità
