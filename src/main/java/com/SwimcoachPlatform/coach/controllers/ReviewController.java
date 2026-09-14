@@ -1,5 +1,6 @@
 package com.SwimcoachPlatform.coach.controllers;
 
+import com.SwimcoachPlatform.coach.dto.ReviewDTO;
 import com.SwimcoachPlatform.coach.entity.Review;
 import com.SwimcoachPlatform.coach.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +33,8 @@ public class ReviewController {
 
     // POST: crea una nuova recensione
     @PostMapping
-    public Review addReview(@RequestBody Review review) {
-        return reviewService.addReview(review);
+    public Review addReview(@RequestBody ReviewDTO reviewDTO) {
+        return reviewService.addReview(reviewDTO);
     }
 
     // PUT: modifica una recensione

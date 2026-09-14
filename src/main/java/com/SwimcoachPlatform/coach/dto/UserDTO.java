@@ -9,8 +9,9 @@ import lombok.Setter;
 public class UserDTO {
 
     private String firstName;
-    private String lastname;
+    private String lastName;
     private String email;
+    private String phone;
     private Role role;
     private boolean active;
 }

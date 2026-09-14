@@ -1,10 +1,13 @@
 package com.SwimcoachPlatform.coach.service;
 
 
+import com.SwimcoachPlatform.coach.dto.UserDTO;
+import com.SwimcoachPlatform.coach.entity.Role;
 import com.SwimcoachPlatform.coach.entity.User;
 import com.SwimcoachPlatform.coach.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -23,7 +26,21 @@ public class UserService {
     public User getUserById(Long id) {
         return userRepository.findById(id).orElse(null);
     }
-    public User saveUser(User user) {
+
+    // POST
+    public User saveUser(UserDTO userDTO) {
+
+        User user = new User();
+
+        user.setFirstName(userDTO.getFirstName());
+        user.setLastName(userDTO.getLastName());
+        user.setEmail(userDTO.getEmail());
+        user.setPhone(userDTO.getPhone());
+
+        user.setRole(Role.CLIENT);
+        user.setActive(true);
+        user.setCreatedAt(LocalDateTime.now());
+
         return userRepository.save(user);
     }
 

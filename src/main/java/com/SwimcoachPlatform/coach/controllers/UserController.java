@@ -1,5 +1,6 @@
 package com.SwimcoachPlatform.coach.controllers;
 
+import com.SwimcoachPlatform.coach.dto.UserDTO;
 import com.SwimcoachPlatform.coach.entity.User;
 import com.SwimcoachPlatform.coach.service.UserService;
 import org.springframework.web.bind.annotation.*;
@@ -29,11 +30,11 @@ public class UserController {
     }
 
     // POST: crea un nuovo utente
-    @PostMapping
-    public User saveUser(@RequestBody User user) {
-        return userService.saveUser(user);
-    }
 
+    @PostMapping
+    public User saveUser(@RequestBody UserDTO userDTO) {
+        return userService.saveUser(userDTO);
+    }
     // PUT: modifica un utente
     @PutMapping("/{id}")
     public User updateUser(@PathVariable Long id,

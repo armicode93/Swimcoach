@@ -1,5 +1,6 @@
 package com.SwimcoachPlatform.coach.controllers;
 
+import com.SwimcoachPlatform.coach.dto.BookingDTO;
 import com.SwimcoachPlatform.coach.entity.Booking;
 import com.SwimcoachPlatform.coach.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,16 +33,17 @@ public class BookingController {
 
     // POST: crea una nuova prenotazione
     @PostMapping
-    public Booking addBooking(@RequestBody Booking booking) {
-        return bookingService.addBooking(booking);
+    public Booking addBooking(@RequestBody BookingDTO bookingDTO) {
+        return bookingService.addBooking(bookingDTO);
     }
 
-    // PUT: modifica una prenotazione
+
     @PutMapping("/{id}")
-    public Booking updateBooking(@PathVariable Long id,
-                                 @RequestBody Booking booking) {
-        booking.setId(id);
-        return bookingService.updateBooking(id, booking);
+    public Booking updateBooking(
+            @PathVariable Long id,
+            @RequestBody BookingDTO dto) {
+
+        return bookingService.updateBooking(id, dto);
     }
 
     // DELETE: elimina una prenotazione

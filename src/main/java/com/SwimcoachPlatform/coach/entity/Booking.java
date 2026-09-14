@@ -52,14 +52,19 @@ public class Booking {
 
     @ManyToOne
     @JoinColumn(name = "coach_id", nullable = false)
+    @Getter @Setter
     private Coach coach;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
+    @Getter
+    @Setter
     private User user;
 
     @ManyToOne
     @JoinColumn(name = "course_id", nullable = false)
+    @Getter
+    @Setter
     private Course course;
 
 

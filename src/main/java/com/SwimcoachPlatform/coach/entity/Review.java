@@ -22,7 +22,7 @@ public class Review {
     private Long id;
 
     @Getter @Setter
-    private String rating;
+    private Integer rating;
 
 
     @Getter @Setter

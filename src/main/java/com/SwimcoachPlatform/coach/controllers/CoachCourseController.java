@@ -1,5 +1,6 @@
 package com.SwimcoachPlatform.coach.controllers;
 
+import com.SwimcoachPlatform.coach.dto.CoachCourseDTO;
 import com.SwimcoachPlatform.coach.entity.Coach;
 import com.SwimcoachPlatform.coach.entity.CoachCourse;
 import com.SwimcoachPlatform.coach.service.CoachCourseService;
@@ -33,13 +34,17 @@ public class CoachCourseController {
 
     // POST: crea una nuova relazione coach-course
     @PostMapping
-    public CoachCourse addCoachCourse(@RequestBody CoachCourse coachCourse) {
-        return coachCourseService.addCoachCourses(coachCourse);
+    public CoachCourse addCoachCourse(@RequestBody CoachCourseDTO coachCourseDTO) {
+        return coachCourseService.addCoachCourse(coachCourseDTO);
     }
     // PUT: modifica un coach
     @PutMapping("/{id}")
-    public CoachCourse updateCoachCourse(@PathVariable Long id, @RequestBody CoachCourse coachCourse)
-    { coachCourse.setId(id); return coachCourseService.updateCoachCourse(coachCourse); }
+    public CoachCourse updateCoachCourse(
+            @PathVariable Long id,
+            @RequestBody CoachCourseDTO coachCourseDTO) {
+
+        return coachCourseService.updateCoachCourse(id, coachCourseDTO);
+    }
 
     // DELETE: elimina una relazione
     @DeleteMapping("/{id}")
