@@ -1,5 +1,6 @@
 package com.SwimcoachPlatform.coach.controllers;
 
+import com.SwimcoachPlatform.coach.dto.CoachDTO;
 import com.SwimcoachPlatform.coach.entity.Coach;
 import com.SwimcoachPlatform.coach.service.CoachService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +27,10 @@ public class CoachController {
      { return coachService.findCoachById(id); }
 
     // POST: crea un nuovo coach
-     @PostMapping
-     public Coach addCoach(@RequestBody Coach coach)
-     { return coachService.addCoach(coach); }
+    @PostMapping
+    public Coach addCoach(@RequestBody CoachDTO coachDTO) {
+        return coachService.addCoach(coachDTO);
+    }
 
     // PUT: modifica un coach
     @PutMapping("/{id}")

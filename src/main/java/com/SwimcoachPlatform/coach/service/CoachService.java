@@ -1,6 +1,7 @@
 package com.SwimcoachPlatform.coach.service;
 
 
+import com.SwimcoachPlatform.coach.dto.CoachDTO;
 import com.SwimcoachPlatform.coach.entity.Coach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,11 @@ public class CoachService {
         return coachRepository.findById(id).orElse(null);
     }
 
-    public Coach addCoach(Coach coach) {
+    public Coach addCoach(CoachDTO coachDTO) {
+
+        Coach  coach = new Coach();
+        coach.setFirstName(coachDTO.getFirstName());
+        coach.setLastname(coachDTO.getLastname());
         return coachRepository.save(coach);
     }
 

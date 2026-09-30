@@ -1,5 +1,7 @@
 package com.SwimcoachPlatform.coach.service;
 
+import com.SwimcoachPlatform.coach.dto.LoginDTO;
+import com.SwimcoachPlatform.coach.dto.LoginResponseDTO;
 import com.SwimcoachPlatform.coach.dto.RegisterDTO;
 import com.SwimcoachPlatform.coach.entity.Role;
 import com.SwimcoachPlatform.coach.entity.User;
@@ -14,26 +16,28 @@ public class AuthService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
 
     public AuthService(
             UserRepository userRepository,
-            PasswordEncoder passwordEncoder) {
+            PasswordEncoder passwordEncoder, JwtService jwtService) {
 
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.jwtService = jwtService;
     }
 
-    public User register(RegisterDTO dto) {
+    public User register(RegisterDTO registerDTO) {
 
         User user = new User();
 
-        user.setFirstName(dto.getFirstName());
-        user.setLastName(dto.getLastName());
-        user.setEmail(dto.getEmail());
-        user.setPhone(dto.getPhone());
+        user.setFirstName(registerDTO.getFirstName());
+        user.setLastName(registerDTO.getLastName());
+        user.setEmail(registerDTO.getEmail());
+        user.setPhone(registerDTO.getPhone());
 
         // Password hashée avec BCrypt
-        user.setPassword(passwordEncoder.encode(dto.getPassword()));
+        user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
 
         // Valeurs gérées par le backend
         user.setRole(Role.CLIENT);
@@ -41,5 +45,19 @@ public class AuthService {
         user.setCreatedAt(LocalDateTime.now());
 
         return userRepository.save(user);
+    }
+    public LoginResponseDTO login(LoginDTO dto) {
+
+        User user = userRepository.findByEmail(dto.getEmail())
+                .orElseThrow(() ->
+                        new RuntimeException("Email or password incorrect"));
+
+        if (!passwordEncoder.matches(dto.getPassword(), user.getPassword())) {
+            throw new RuntimeException("Email or password incorrect");
+        }
+
+        String token = jwtService.generateToken(user.getEmail());
+
+        return new LoginResponseDTO(token);
     }
 }
