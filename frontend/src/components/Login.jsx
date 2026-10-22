@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import './Auth.css'
+import { useAuth } from '../AuthContext'
 
 function Login() {
     const [email, setEmail] = useState('')
@@ -10,6 +11,7 @@ function Login() {
     const [loading, setLoading] = useState(false)
 
     const navigate = useNavigate()
+    const { login } = useAuth()
 
     async function handleSubmit(event) {
         event.preventDefault()
@@ -35,7 +37,7 @@ function Login() {
                 throw new Error('The server did not return an authentication token.')
             }
 
-            localStorage.setItem('token', data.token)
+            login(data.token)
             navigate('/')
         } catch (err) {
             setError(err.message || 'Unable to connect to the server.')

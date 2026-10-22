@@ -9,6 +9,7 @@ import Register from "./components/Register.jsx";
 
 
 import { Routes, Route } from 'react-router-dom'
+import MyAccount from "./components/MyAccount.jsx";
 
 function App() {
     return (
@@ -22,6 +23,7 @@ function App() {
                 <Route path="/coaches/:id" element={<CoachProfile />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
+                <Route path="/account" element={<MyAccount />} />
             </Routes>
         </>
     )

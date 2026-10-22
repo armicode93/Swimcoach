@@ -42,10 +42,15 @@ function Register() {
                 body: JSON.stringify(form)
             })
 
-            if (!response.ok) {
-                const message = await response.text()
-                throw new Error(message || 'Registration failed.')
-            }
+
+if (!response.ok) {
+    const data = await response.json()
+
+    throw new Error(
+        data.message || 'Registration failed.'
+    )
+}
+
 
             setSuccess('Account created successfully! Redirecting to login...')
 
