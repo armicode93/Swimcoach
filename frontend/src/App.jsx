@@ -6,6 +6,7 @@ import Courses from './components/Courses'
 import CoachProfile from './components/CoachProfile'
 import Login from './components/Login'
 import Register from "./components/Register.jsx";
+import MyBookings from './components/MyBookings'
 
 
 import { Routes, Route } from 'react-router-dom'
@@ -24,6 +25,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/account" element={<MyAccount />} />
+                <Route path="/bookings" element={<MyBookings />} />
             </Routes>
         </>
     )

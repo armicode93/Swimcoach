@@ -32,7 +32,10 @@ function Navbar() {
                     <Link to="/courses">Courses</Link>
 
                     {isAuthenticated && (
-                        <Link to="/account">My Account</Link>
+                        <>
+                            <Link to="/account">My Account</Link>
+                            <Link to="/bookings">My Bookings</Link>
+                        </>
                     )}
 
                 </div>
