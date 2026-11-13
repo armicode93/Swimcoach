@@ -150,4 +150,27 @@
     .booking-item {
         padding: 18px;
     }
+
+    .booking-delete-button {
+        margin-top: 15px;
+        padding: 10px 16px;
+        border: none;
+        border-radius: 6px;
+        background-color: #dc3545;
+        color: white;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+    }
+
+    .booking-delete-button:hover {
+        background-color: #bb2d3b;
+    }
+
+    .booking-delete-button:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
 }

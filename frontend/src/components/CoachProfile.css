@@ -1,4 +1,8 @@
 
+/* ==============================
+   COACH PROFILE
+================================ */
+
 .coach-profile {
     max-width: 1000px;
     margin: 0 auto;
@@ -72,7 +76,159 @@
     color: #64748b;
 }
 
+.profile-phone a {
+    color: #0077b6;
+    text-decoration: none;
+}
+
+.profile-phone a:hover {
+    text-decoration: underline;
+}
+
+
+/* ==============================
+   BOOKING SECTION
+================================ */
+
+.coach-profile .booking-section {
+    margin-top: 36px;
+    padding: 36px;
+    background: #ffffff;
+    border: 1px solid #e5edf2;
+    border-radius: 18px;
+    box-shadow: 0 10px 35px rgba(18, 48, 71, 0.06);
+}
+
+.coach-profile .booking-section h2 {
+    margin: 0 0 10px;
+    color: #123047;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.coach-profile .booking-intro {
+    margin: 0 0 28px;
+    color: #64748b;
+    font-size: 15px;
+}
+
+.coach-profile .booking-section form {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    max-width: 620px;
+}
+
+.coach-profile .booking-section label {
+    display: block;
+    margin-top: 12px;
+    color: #243b53;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.coach-profile .booking-section select,
+.coach-profile .booking-section textarea {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 15px;
+    border: 1px solid #d8e2e9;
+    border-radius: 9px;
+    background-color: #f9fbfc;
+    color: #243b53;
+    font-family: inherit;
+    font-size: 15px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.coach-profile .booking-section select:focus,
+.coach-profile .booking-section textarea:focus {
+    outline: none;
+    border-color: #0086a8;
+    box-shadow: 0 0 0 3px rgba(0, 134, 168, 0.12);
+    background: #ffffff;
+}
+
+.coach-profile .booking-section textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+.coach-profile .course-info {
+    margin: 4px 0 12px;
+    padding: 15px 18px;
+    border-radius: 10px;
+    background: #eff8fa;
+    color: #24566a;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.coach-profile .booking-submit-button {
+    width: 100%;
+    min-height: 50px;
+    margin-top: 18px;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 9px;
+    background: #007b9e;
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.coach-profile .booking-submit-button:hover {
+    background: #006582;
+    transform: translateY(-1px);
+}
+
+.coach-profile .booking-submit-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.coach-profile .booking-error,
+.coach-profile .booking-success {
+    max-width: 620px;
+    box-sizing: border-box;
+    padding: 14px 16px;
+    border-radius: 9px;
+    font-size: 14px;
+}
+
+.coach-profile .booking-error {
+    background: #fff1f0;
+    color: #b42318;
+}
+
+.coach-profile .booking-success {
+    background: #ecfdf3;
+    color: #067647;
+}
+
+.coach-profile .booking-login-hint {
+    color: #64748b;
+    font-size: 14px;
+}
+
+.coach-profile .booking-login-hint a {
+    color: #007b9e;
+    font-weight: 600;
+}
+
+
+/* ==============================
+   RESPONSIVE DESIGN
+================================ */
+
 @media (max-width: 700px) {
+
     .coach-profile {
         padding: 32px 16px;
     }
@@ -91,14 +247,11 @@
         font-size: 28px;
     }
 
-    .profile-phone a {
-        color: #0077b6;
-        text-decoration: none;
+    .coach-profile .booking-section {
+        padding: 22px 18px;
     }
 
-    .profile-phone a:hover {
-        text-decoration: underline;
+    .coach-profile .booking-section h2 {
+        font-size: 24px;
     }
-
-
 }

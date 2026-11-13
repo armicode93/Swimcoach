@@ -1,5 +1,6 @@
 package com.SwimcoachPlatform.coach.controllers;
 
+import com.SwimcoachPlatform.coach.dto.AvailabilityDTO;
 import com.SwimcoachPlatform.coach.entity.Availability;
 import com.SwimcoachPlatform.coach.service.AvailabilityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,18 @@ public class AvailabilityController {
         return availabilityService.getAllAvailability();
     }
 
+    @GetMapping("/coach/{coachId}/course/{courseId}")
+    public List<Availability> getAvailabilityByCoachAndCourse(
+            @PathVariable Long coachId,
+            @PathVariable Long courseId
+    ) {
+        return availabilityService.getAvailabilityByCoachAndCourse(
+                coachId,
+                courseId
+        );
+    }
+
+
     // GET: recupera una disponibilità tramite ID
     @GetMapping("/{id}")
     public Availability findAvailabilityById(@PathVariable Long id) {
@@ -31,10 +44,12 @@ public class AvailabilityController {
     }
 
     // POST: crea una nuova disponibilità
+
     @PostMapping
-    public Availability addAvailability(@RequestBody Availability availability) {
-        return availabilityService.addAvailability(availability);
+    public Availability addAvailability(@RequestBody AvailabilityDTO availabilityDTO) {
+        return availabilityService.addAvailability(availabilityDTO);
     }
+
 
     // PUT: modifica una disponibilità
     @PutMapping("/{id}")

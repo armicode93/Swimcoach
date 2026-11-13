@@ -23,14 +23,28 @@ public class SecurityConfiguration {
         http
                 .csrf(csrf -> csrf.disable())
 
+
                 .authorizeHttpRequests(auth -> auth
+
+                        // Endpoints che richiedono autenticazione
+                        .requestMatchers(
+                                "/api/coaches/me",
+                                "/api/users/me",
+                                "/api/bookings/**"
+                        ).authenticated()
+
+                        // Endpoints pubblici
                         .requestMatchers(
                                 "/api/auth/**",
+                                "/api/coaches",
+                                "/api/coaches/*",
+                                "/api/courses",
                                 "/swagger-ui/**",
                                 "/swagger-ui.html",
                                 "/v3/api-docs/**"
                         ).permitAll()
-                        .anyRequest().authenticated()
+
+                        .anyRequest().permitAll()
                 )
 
                 .addFilterBefore(

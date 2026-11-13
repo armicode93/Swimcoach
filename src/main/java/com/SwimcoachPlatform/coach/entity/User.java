@@ -1,4 +1,5 @@
 package com.SwimcoachPlatform.coach.entity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -32,6 +33,7 @@ public class User {
     private String email;
 
     @Getter @Setter
+    @JsonIgnore // non include la password nel Json
     private String password;
 
     @Getter @Setter
@@ -50,12 +52,19 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     @Getter @Setter
+    @JsonIgnore
     private List<Booking> bookings = new ArrayList<>();
 
 
     @OneToMany(mappedBy = "user")
     @Getter @Setter
     private List<Review> reviews = new ArrayList<>();
+
+    @OneToOne(mappedBy = "user")
+    @Getter
+    @Setter
+    @JsonIgnore
+    private Coach coach;
 
 
 

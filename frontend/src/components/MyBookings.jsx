@@ -10,29 +10,32 @@ function MyBookings() {
     const [bookings, setBookings] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState('')
+    const [deletingId, setDeletingId] = useState(null)
+
+    async function fetchBookings() {
+        try {
+            setError('')
+
+            const response = await fetch('/api/bookings/my-bookings', {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+
+            if (!response.ok) {
+                throw new Error('Unable to load your bookings.')
+            }
+
+            const data = await response.json()
+            setBookings(data)
+        } catch (err) {
+            setError(err.message || 'Something went wrong.')
+        } finally {
+            setLoading(false)
+        }
+    }
 
     useEffect(() => {
-        async function fetchBookings() {
-            try {
-                const response = await fetch('/api/bookings/my-bookings', {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                })
-
-                if (!response.ok) {
-                    throw new Error('Unable to load your bookings.')
-                }
-
-                const data = await response.json()
-                setBookings(data)
-            } catch (err) {
-                setError(err.message || 'Something went wrong.')
-            } finally {
-                setLoading(false)
-            }
-        }
-
         if (token) {
             fetchBookings()
         } else {
@@ -40,6 +43,38 @@ function MyBookings() {
             setLoading(false)
         }
     }, [token])
+
+    async function handleDelete(bookingId) {
+        const confirmed = window.confirm(
+            'Are you sure you want to delete this booking?'
+        )
+
+        if (!confirmed) return
+
+        try {
+            setDeletingId(bookingId)
+            setError('')
+
+            const response = await fetch(`/api/bookings/${bookingId}`, {
+                method: 'DELETE',
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+
+            if (!response.ok) {
+                throw new Error('Unable to delete this booking.')
+            }
+
+            setBookings(previous =>
+                previous.filter(booking => booking.id !== bookingId)
+            )
+        } catch (err) {
+            setError(err.message || 'Something went wrong.')
+        } finally {
+            setDeletingId(null)
+        }
+    }
 
     function formatDate(date) {
         return new Date(`${date}T00:00:00`).toLocaleDateString('en-GB', {
@@ -61,7 +96,7 @@ function MyBookings() {
         )
     }
 
-    if (error) {
+    if (!token) {
         return (
             <main className="bookings-page">
                 <section className="bookings-card">
@@ -83,6 +118,8 @@ function MyBookings() {
                     View and manage your swimming lessons.
                 </p>
 
+                {error && <p className="bookings-error">{error}</p>}
+
                 {bookings.length === 0 ? (
                     <div className="bookings-empty">
                         <h2>No bookings yet</h2>
@@ -99,14 +136,13 @@ function MyBookings() {
                         {bookings.map(booking => (
                             <article className="booking-item" key={booking.id}>
                                 <div className="booking-header">
-                                    <h2>
-                                        {booking.course?.name || 'Swimming Lesson'}
-                                    </h2>
+                                    <h2>{booking.course?.name || 'Swimming Lesson'}</h2>
+
                                     <span
                                         className={`booking-status status-${booking.status?.toLowerCase()}`}
                                     >
-                                        {booking.status}
-                                    </span>
+                    {booking.status}
+                  </span>
                                 </div>
 
                                 <p>
@@ -132,6 +168,16 @@ function MyBookings() {
                                         <strong>Comment:</strong> {booking.comment}
                                     </p>
                                 )}
+
+                                <button
+                                    className="booking-delete-button"
+                                    onClick={() => handleDelete(booking.id)}
+                                    disabled={deletingId === booking.id}
+                                >
+                                    {deletingId === booking.id
+                                        ? 'Deleting...'
+                                        : 'Delete booking'}
+                                </button>
                             </article>
                         ))}
                     </div>

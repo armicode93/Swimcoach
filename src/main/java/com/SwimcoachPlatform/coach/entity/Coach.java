@@ -1,6 +1,7 @@
 package com.SwimcoachPlatform.coach.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -86,6 +87,13 @@ public class Coach {
 
     @OneToMany(mappedBy = "coach")
     private List<CoachCourse> coachCourses = new ArrayList<>();
+
+    @OneToOne
+    @JoinColumn(name = "user_id", unique = true)
+    @Getter
+    @Setter
+    @JsonIgnore
+    private User user;
 
 
 

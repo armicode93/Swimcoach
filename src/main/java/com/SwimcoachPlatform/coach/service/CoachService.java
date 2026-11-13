@@ -3,6 +3,7 @@ package com.SwimcoachPlatform.coach.service;
 
 import com.SwimcoachPlatform.coach.dto.CoachDTO;
 import com.SwimcoachPlatform.coach.entity.Coach;
+import com.SwimcoachPlatform.coach.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.SwimcoachPlatform.coach.repository.CoachRepository;
@@ -14,10 +15,12 @@ import java.util.Optional;
 public class CoachService {
 
     private final CoachRepository coachRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    public CoachService(CoachRepository coachRepository) {
+    public CoachService(CoachRepository coachRepository, UserRepository userRepository) {
         this.coachRepository = coachRepository;
+        this.userRepository = userRepository;
     }
 
     public List<Coach> findAllCoaches() {
@@ -35,10 +38,23 @@ public class CoachService {
         coach.setLastname(coachDTO.getLastname());
         return coachRepository.save(coach);
     }
+    public Coach findCoachByEmail(String email) {
+
+        var user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found."));
+
+        return findCoachByUserId(user.getId());
+    }
+
 
     public Coach updateCoach(Coach coach) {return coachRepository.save(coach);}
 
     public void deleteCoach(Long id) {
         coachRepository.deleteById(id);
+    }
+
+    public Coach findCoachByUserId(Long userId) {
+        return coachRepository.findByUserId(userId)
+                .orElseThrow(() -> new RuntimeException("Coach profile not found."));
     }
 }

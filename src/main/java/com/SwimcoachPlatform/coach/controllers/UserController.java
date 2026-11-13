@@ -1,9 +1,14 @@
 package com.SwimcoachPlatform.coach.controllers;
 
+import com.SwimcoachPlatform.coach.dto.UpdateProfileDTO;
 import com.SwimcoachPlatform.coach.dto.UserDTO;
+import com.SwimcoachPlatform.coach.dto.UserProfileDTO;
 import com.SwimcoachPlatform.coach.entity.User;
 import com.SwimcoachPlatform.coach.service.UserService;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -48,4 +53,40 @@ public class UserController {
     public void deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
     }
+
+
+    @GetMapping("/me")
+    public UserProfileDTO getMyProfile(Authentication authentication) {
+
+        if (authentication == null || !authentication.isAuthenticated()) {
+            throw new ResponseStatusException(
+                    HttpStatus.UNAUTHORIZED,
+                    "You must be logged in to view your profile."
+            );
+        }
+
+        String email = authentication.getName();
+
+        return userService.getUserProfileByEmail(email);
+    }
+
+    @PutMapping("/me")
+    public UserProfileDTO updateMyProfile(
+            Authentication authentication,
+            @RequestBody UpdateProfileDTO dto) {
+
+        if (authentication == null
+                || !authentication.isAuthenticated()
+                || authentication.getPrincipal().equals("anonymousUser")) {
+            throw new ResponseStatusException(
+                    HttpStatus.UNAUTHORIZED,
+                    "You must be logged in to update your profile."
+            );
+        }
+
+        String email = authentication.getName();
+
+        return userService.updateMyProfile(email, dto);
+    }
+
 }

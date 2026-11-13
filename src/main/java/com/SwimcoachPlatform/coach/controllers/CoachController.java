@@ -1,4 +1,6 @@
 package com.SwimcoachPlatform.coach.controllers;
+import org.springframework.security.core.Authentication;
+import com.SwimcoachPlatform.coach.repository.UserRepository;
 
 import com.SwimcoachPlatform.coach.dto.CoachDTO;
 import com.SwimcoachPlatform.coach.entity.Coach;
@@ -41,6 +43,11 @@ public class CoachController {
     @DeleteMapping("/{id}")
     public void deleteCoach(@PathVariable Long id)
     { coachService.deleteCoach(id); }
+
+    @GetMapping("/me")
+    public Coach getMyProfile(Authentication authentication) {
+        return coachService.findCoachByEmail(authentication.getName());
+    }
 
 
 }
